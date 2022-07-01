@@ -1,11 +1,45 @@
 import {React,useEffect,useState} from "react";
 import Countdown from 'react-countdown';
-import './OtpVerify.css'
+import './OtpVerify.css';
+import axios from "axios";
+import * as stuff from "../../stuff";
+import './SignUp.css'
+import {useLocation,useNavigate} from 'react-router-dom';
 
 const OtpVerify = () => {
-
-   const [code,setCode] = useState(null); 
-
+    const [isValid,setIsValid] = useState(true); 
+    const[code,setCode]=useState(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [message,setMessage] = useState('');
+    const validation = async() =>{
+        try{
+        const result = await axios.post(stuff.serverAddress.concat(stuff.VERIFY_OTP), {
+            number:code,
+            name:location.state.name
+        });
+        setIsValid(true);
+        navigate('/',{replace:true})
+        }catch(error) {
+            console.log(error);
+            if(error.response){
+                setMessage(error.response.data.error.message)
+                console.log(message);
+                console.log("dfghjkl");
+                setIsValid(false)
+            }
+        }
+    } 
+   useEffect(() => {
+    console.log(location);
+    if(code!== null){
+        if(code.length === 6){
+            validation();
+        }
+        setIsValid(true);
+    }
+    
+  }, [code]);
    
     return(
         <div className="container">
@@ -24,6 +58,11 @@ const OtpVerify = () => {
                         precision={1}
                         renderer={props => <div className="timer"> زمان باقی مانده :  { parseInt(props.total/1000)}</div>}
                     />
+                    { isValid === false ? 
+                        <div class="alert alert-danger" role="alert">
+                            <p>{message}</p>
+                        </div>
+                : null}  
             </div>
         </div>
     )

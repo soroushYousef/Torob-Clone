@@ -28,7 +28,7 @@ const SignUp = () => {
         });
         setIsValid(true);
         setISLoad(false);
-        navigate('/'.concat(stuff.VERIFY_OTP),{replace:true})
+        navigate('/'.concat(stuff.VERIFY_OTP),{replace:true,state:{name:name}})
         }catch(error) {
             if(error.response){
                setISLoad(false);
