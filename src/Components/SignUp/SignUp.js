@@ -2,7 +2,9 @@ import {React,useEffect,useState} from "react";
 import './SignUp.css'
 import * as stuff from "../../stuff";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import {Route,Routes,BrowserRouter as Router} from "react-router-dom"
+import OtpVerify from "./OtpVerify";
 
 const SignUp = () => {
 
@@ -11,6 +13,9 @@ const SignUp = () => {
     const [name,setName] = useState('');
     const [message,setMessage] = useState('');
     const [isValid,setIsValid] = useState(null);    
+
+    const navigate = useNavigate();
+    
 
     const SignUp = async(e) =>{
         //e.preventdefault()
@@ -22,10 +27,11 @@ const SignUp = () => {
             email : email,
             password : password
         });
-        
+        setIsValid(true);
+        navigate(stuff.VERIFY_OTP,{replace:true})
         }catch(error) {
             if(error.response){
-                // console.log(error.response.data.error.message)
+               
                 setMessage(error.response.data.error.message)
                 setIsValid(false)
             }
@@ -33,14 +39,12 @@ const SignUp = () => {
     }
     const submitAction = (password,email) => {
         
-        // setIsValidPassword(passwordValidation(password))
-        // setIsValidEmail(emailValidation(email))
         SignUp()
-        
     }
 
     return(
         <div className="container h-100 signup-container mt-5">
+            
         <div className="d-flex flex-column justify-content-center px-2">
             <form action="">
             <div className="from-group mb-4">
@@ -58,17 +62,10 @@ const SignUp = () => {
                     <input type="password" className="form-control" id="inputPassword" onChange={ (e) => setPassword(e.target.value) } />
                 </div>
                 </form>
-                <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(password,email) }> <Link style={{textDecoration : 'none' , color : 'white'}} to={ stuff.VERIFY_OTP }>ثبت نام</Link>  </button>
-                {/* {isValidPassword===false ? 
-                <div class="alert alert-danger" role="alert">
-                     <p>پسورد باید شامل حداقل یک رقم و دست کم 8 کاراکتر باشد</p>
-                </div>
-                : null} */}
-                 {/* {isValidEmail===false ? 
-                <div class="alert alert-danger" role="alert">
-                     <p>ایمیل را درست وارد کنید</p>
-                </div>
-                : null} */}
+                <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(password,email)}> ثبت نام</button>
+                <Routes>
+                    <Route exact path = {stuff.SIGNUP.concat(stuff.VERIFY_OTP) } element = { <OtpVerify/> }/> 
+                </Routes>
                 { isValid === false ? 
                 <div class="alert alert-danger" role="alert">
                      <p>{message}</p>
