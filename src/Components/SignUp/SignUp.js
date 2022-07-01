@@ -12,33 +12,32 @@ const SignUp = () => {
     const [password,setPassword] = useState('');
     const [name,setName] = useState('');
     const [message,setMessage] = useState('');
-    const [isValid,setIsValid] = useState(null);    
-
+    const [isValid,setIsValid] = useState(null); 
+    const [isLoad,setISLoad] = useState(false);   
     const navigate = useNavigate();
     
 
     const SignUp = async(e) =>{
-        //e.preventdefault()
-        
 
         try{
+            setISLoad(true);
         const result = await axios.post(stuff.serverAddress.concat(stuff.SIGNUP), {
             name : name,
             email : email,
             password : password
         });
         setIsValid(true);
+        setISLoad(false);
         navigate('/'.concat(stuff.VERIFY_OTP),{replace:true})
         }catch(error) {
             if(error.response){
-               
+               setISLoad(false);
                 setMessage(error.response.data.error.message)
                 setIsValid(false)
             }
         }
     }
-    const submitAction = (password,email) => {
-        console.log(stuff.VERIFY_OTP)
+    const submitAction = () => {
         SignUp()
     }
 
@@ -62,8 +61,12 @@ const SignUp = () => {
                     <input type="password" className="form-control" id="inputPassword" onChange={ (e) => setPassword(e.target.value) } />
                 </div>
                 </form>
-                <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(password,email)}> ثبت نام</button>
-                
+                {
+                    isLoad === false?
+                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction()}> ثبت نام</button>
+                    :
+                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction()}>  ...ثبت نام</button>
+                }
                 { isValid === false ? 
                 <div class="alert alert-danger" role="alert">
                      <p>{message}</p>
