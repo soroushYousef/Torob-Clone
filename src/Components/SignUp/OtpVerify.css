@@ -1,0 +1,15 @@
+.otp-container{
+    border: 2px solid black;
+    margin-top: 2em;
+    border-radius: 40px;
+}
+
+.timer {
+    white-space: nowrap;
+    overflow-x: auto;
+    border: 2px solid black;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 25px;
+    background-color: gray;
+}
