@@ -1,6 +1,6 @@
 .div_two{
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 8rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -19,4 +19,16 @@
 .submit-button-admin {
     width: 10em;
     color: black;
+}
+.div_two_1{
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    column-gap: 80px;
+    align-items: center;
+    justify-content: center;
+      background-position: center;
+      align-items: center;
 }

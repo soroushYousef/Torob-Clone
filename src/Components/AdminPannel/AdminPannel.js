@@ -43,11 +43,7 @@ const AdminPannel = () => {
                 setisValid(true);
                 setIsLoad(false);
                 setSehat(true);
-                setMessage(result.data.message);
-          
-                
-            
-        
+                setMessage(result.data.message); 
         
         }catch(error) {
             if(error.response){
