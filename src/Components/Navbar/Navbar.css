@@ -1,3 +1,12 @@
 a:link {
     text-decoration: none;
 }
+.navbar {
+    overflow: hidden;
+    background-color: #333; 
+  }
+  
+.div_flex{
+    display: flex;
+    flex-direction: row;
+}

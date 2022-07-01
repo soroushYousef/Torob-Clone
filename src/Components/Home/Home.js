@@ -4,6 +4,7 @@ import * as stuff from '../../stuff'
 import SignUp from "../SignUp/SignUp";
 import OtpVerify from "../SignUp/OtpVerify";
 import SignIn from "../SignIn/SignIn";
+import AdminPannel from "../AdminPannel/AdminPannel";
 
 const Home = () => {
     
@@ -16,7 +17,9 @@ const Home = () => {
                 <Routes>
                     <Route exact path = {stuff.SIGNUP.concat('/')} element = {<SignUp/>} />
                     <Route exact path = {stuff.VERIFY_OTP } element = { <OtpVerify/> }/>   
-                    <Route exact path = {stuff.SIGNIN } element = { <SignIn/> }/>                   
+                    <Route exact path = {stuff.SIGNIN } element = { <SignIn/> }/>   
+                    <Route path="/adminPannel" element={<AdminPannel />} />
+                          
                 </Routes>
         
         </div>

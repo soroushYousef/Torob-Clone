@@ -6,6 +6,7 @@ import axios from "axios";
 import * as stuff from "../../stuff";
 import './SignUp.css'
 import {useLocation,useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
 
 const OtpVerify = () => {
     const [isValid,setIsValid] = useState(true); 
@@ -23,7 +24,7 @@ const OtpVerify = () => {
         });
         console.log(result);
         cookies.set('jwt', result.data.token, { path: '/' });
-        cookies.set('isAdmin', result.data.isStoreOwner, { path: '/' });
+        cookies.set('isAdmin', result.data.isAdmin, { path: '/' });
         cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
         setIsValid(true);
         navigate('/',{replace:true})

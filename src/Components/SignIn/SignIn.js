@@ -5,9 +5,11 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import {Route,Routes,BrowserRouter as Router} from "react-router-dom"
 import {useLocation,useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { changeLoginState} from '../redux/reducer'
 
 const SignIn = () => {
-
+    const dispatch = useDispatch();
     const [password,setPassword] = useState('');
     const [name,setName] = useState('');
     const [message,setMessage] = useState('');
@@ -28,8 +30,9 @@ const SignIn = () => {
         setIsValid(true);
         setISLoad(false);
         cookies.set('jwt', result.data.token, { path: '/' });
-        cookies.set('isAdmin', result.data.isStoreOwner, { path: '/' });
+        cookies.set('isAdmin', result.data.isAdmin, { path: '/' });
         cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
+        dispatch(changeLoginState());
         navigate('/',{replace:true})
         }catch(error) {
             if(error.response){
