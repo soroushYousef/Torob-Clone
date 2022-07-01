@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import * as stuff from '../../stuff'
 import SignUp from "../SignUp/SignUp";
 import OtpVerify from "../SignUp/OtpVerify";
+import SignIn from "../SignIn/SignIn";
 
 const Home = () => {
     
@@ -14,7 +15,8 @@ const Home = () => {
             <Navbar />
                 <Routes>
                     <Route exact path = {stuff.SIGNUP.concat('/')} element = {<SignUp/>} />
-                    <Route exact path = {stuff.VERIFY_OTP } element = { <OtpVerify/> }/>                     
+                    <Route exact path = {stuff.VERIFY_OTP } element = { <OtpVerify/> }/>   
+                    <Route exact path = {stuff.SIGNIN } element = { <SignIn/> }/>                   
                 </Routes>
         
         </div>
