@@ -1,0 +1,12 @@
+.signin-container {
+    padding-top: 3em;
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: white;
+    max-width: 50em;
+}
+
+.submit-button-signin {
+    width: 10em;
+    color: black;
+}

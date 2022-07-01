@@ -1,5 +1,6 @@
 import {React,useEffect,useState} from "react";
 import Countdown from 'react-countdown';
+import Cookies from 'universal-cookie';
 import './OtpVerify.css';
 import axios from "axios";
 import * as stuff from "../../stuff";
@@ -12,26 +13,29 @@ const OtpVerify = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [message,setMessage] = useState('');
+    const cookies = new Cookies();
+ 
     const validation = async() =>{
         try{
         const result = await axios.post(stuff.serverAddress.concat(stuff.VERIFY_OTP), {
             number:code,
             name:location.state.name
         });
+        console.log(result);
+        cookies.set('jwt', result.data.token, { path: '/' });
+        cookies.set('isAdmin', result.data.isStoreOwner, { path: '/' });
+        cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
         setIsValid(true);
         navigate('/',{replace:true})
         }catch(error) {
             console.log(error);
             if(error.response){
                 setMessage(error.response.data.error.message)
-                console.log(message);
-                console.log("dfghjkl");
                 setIsValid(false)
             }
         }
     } 
    useEffect(() => {
-    console.log(location);
     if(code!== null){
         if(code.length === 6){
             validation();
