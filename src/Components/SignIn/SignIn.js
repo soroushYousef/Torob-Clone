@@ -31,8 +31,10 @@ const SignIn = () => {
         setISLoad(false);
         cookies.set('jwt', result.data.token, { path: '/' });
         cookies.set('isAdmin', result.data.isAdmin, { path: '/' });
+        console.log(cookies.get("jwt")===result.data.token);
+        console.log("piruzi");
         cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
-        dispatch(changeLoginState());
+        dispatch(changeLoginState(1));
         navigate('/',{replace:true})
         }catch(error) {
             if(error.response){

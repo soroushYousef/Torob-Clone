@@ -10,8 +10,9 @@ export const torob_Slice = createSlice({
     name: "slice_for_torob",
     initialState,
     reducers: {
-        changeLoginState: (state) => {
-            if(state.login === false){
+        changeLoginState: (state,action) => {
+            if(action.payload===1){
+                console.log("in store");
                 state.login = true;
             }else{
                 state.login = false;
