@@ -3,9 +3,10 @@
     border: 2px solid black;
     border-radius: 25px;
     background-color: white;
+    max-width: 50em;
 }
 
 .submit-button {
-    margin-left: 30em;
-    margin-right: 30em;
+    width: 10em;
+    color: black;
 }
