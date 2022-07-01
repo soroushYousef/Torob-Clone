@@ -28,7 +28,7 @@ const SignUp = () => {
             password : password
         });
         setIsValid(true);
-        navigate(stuff.VERIFY_OTP,{replace:true})
+        navigate('/'.concat(stuff.VERIFY_OTP),{replace:true})
         }catch(error) {
             if(error.response){
                
@@ -38,7 +38,7 @@ const SignUp = () => {
         }
     }
     const submitAction = (password,email) => {
-        
+        console.log(stuff.VERIFY_OTP)
         SignUp()
     }
 
@@ -63,9 +63,7 @@ const SignUp = () => {
                 </div>
                 </form>
                 <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(password,email)}> ثبت نام</button>
-                <Routes>
-                    <Route exact path = {stuff.SIGNUP.concat(stuff.VERIFY_OTP) } element = { <OtpVerify/> }/> 
-                </Routes>
+                
                 { isValid === false ? 
                 <div class="alert alert-danger" role="alert">
                      <p>{message}</p>

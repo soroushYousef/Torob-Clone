@@ -14,7 +14,7 @@ const Home = () => {
             <Navbar />
                 <Routes>
                     <Route exact path = {stuff.SIGNUP.concat('/')} element = {<SignUp/>} />
-                    
+                    <Route exact path = {stuff.VERIFY_OTP } element = { <OtpVerify/> }/>                     
                 </Routes>
         
         </div>
