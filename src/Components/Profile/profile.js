@@ -7,6 +7,8 @@ import '../AdminPannel/AdminPannel.css';
 import '../SignUp/SignUp.css';
 import Favorite from './favorits' ;
 import Cookies from 'universal-cookie';
+import { changeLoginState,filterAndSave} from '../redux/reducer';
+import { useSelector, useDispatch } from "react-redux";
 
 const ProfilePage = () => {
     const [isLoad,setIsLoad] = useState(false);
@@ -17,7 +19,13 @@ const ProfilePage = () => {
     const[canseefave,setcanseefav]=useState(null);
     const[data,setData]=useState(null);
     const [isValid1,setisValid1]=useState(null);
+    const dispatch=useDispatch();
+    const arr_data = useSelector((state)=>state.slice_for_torob.holder);
     const cookies = new Cookies();
+
+    useEffect(() => {
+        setData(arr_data);
+      }, [arr_data]);
    
     const getfavorits = async()=>{
         setIsLoad(true);
@@ -45,6 +53,7 @@ const ProfilePage = () => {
                 console.log(json);
                 setcanseefav(true);
                 setData(json.favorits.favorites);
+                dispatch(filterAndSave({arr:json.favorits.favorites,target:1}));
                 
                 
             }
