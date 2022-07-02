@@ -261,7 +261,7 @@ const StoreOwnerPannel = () => {
                 pathCategory:path,
                 storeName:store_name,
                 productName:productesm,
-                productPrice:price,
+                productPrice:parseInt(price),
                 productFields:f_se,
                 link:link
             }),

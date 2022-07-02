@@ -55,7 +55,7 @@ const Navbar = () => {
                     :
                     <div className="div_flex">
                         <div >
-                        <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}> profile  </Link></button>
+                        <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => navigate('/userProfile',{replace:true})}> profile </button>
                         </div>
                         <div>
                             <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>signout  </Link></button>

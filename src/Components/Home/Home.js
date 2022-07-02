@@ -5,7 +5,8 @@ import SignUp from "../SignUp/SignUp";
 import OtpVerify from "../SignUp/OtpVerify";
 import SignIn from "../SignIn/SignIn";
 import AdminPannel from "../AdminPannel/AdminPannel";
-import StoreOwnerPannel from '../StoreOwnerPannel/StoreOwnerPannel'
+import StoreOwnerPannel from '../StoreOwnerPannel/StoreOwnerPannel';
+import Profile from '../Profile/profile';
 
 const Home = () => {
     
@@ -21,6 +22,7 @@ const Home = () => {
                     <Route exact path = {stuff.SIGNIN } element = { <SignIn/> }/>   
                     <Route path="/adminPannel" element={<AdminPannel />} />
                     <Route path="/storeOwnerPannel" element={<StoreOwnerPannel />} />
+                    <Route path="/userProfile" element={<Profile />} />
                           
                 </Routes>
         
