@@ -19,6 +19,10 @@ const Product = (prod)=>{
     const [isValid,setisValid]=useState(null);
     const [message,setMessage]=useState(null);
     const [sehat,setSehat]=useState(null);
+
+    const[name,setName] = useState(null);
+    const[email,setEmail] = useState(null);
+
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
     const isStoreman = useSelector((state)=>state.slice_for_torob.isStoreman);
     const [clickAddP,setclickaddp]=useState(null);
