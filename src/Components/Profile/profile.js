@@ -19,6 +19,12 @@ const ProfilePage = () => {
     const[canseefave,setcanseefav]=useState(null);
     const[data,setData]=useState(null);
     const [isValid1,setisValid1]=useState(null);
+
+    const [user,setUser] = useState(null);
+    const [email,setEmail] = useState(null)
+    const [pass,setpass] = useState(null);
+    const [mobile,setMobile] = useState(null); 
+
     const dispatch=useDispatch();
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
     const update = useSelector((state)=>state.slice_for_torob.update2);
