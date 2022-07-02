@@ -13,6 +13,7 @@ const ProfilePage = () => {
     const [message,setMessage]=useState(null);
     const [isValid,setisValid]=useState(null);
     const [sehat,setSehat]=useState(null);
+    const [sehat1,setSehat1]=useState(null);
     const[canseefave,setcanseefav]=useState(null);
     const[data,setData]=useState(null);
     const [isValid1,setisValid1]=useState(null);
@@ -147,7 +148,7 @@ const ProfilePage = () => {
                         <div class="alert alert-danger" role="alert">
                             <p>{message}</p>
                          </div>
-                        : sehat?
+                        : sehat1?
                                 <div style={{backgroundColor:"green"}}>
                                     <p>{message}</p>
                                 </div>
