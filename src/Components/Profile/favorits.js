@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as stuff from "../../stuff";
 import {Card,Button} from 'react-bootstrap'
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLoginState,filterAndSave} from '../redux/reducer'
+import Cookies from 'universal-cookie';
 import '../StoreOwnerPannel/report.css';
 const Favorits = (prod)=>{
     let p =prod;
@@ -13,12 +15,23 @@ const Favorits = (prod)=>{
     console.log(prod);
     console.log(prod);
     const dispatch=useDispatch();
+    const [isLoad,setIsLoad] = useState(false);
+    const [isValid,setisValid]=useState(null);
+    const [message,setMessage]=useState(null);
+    const [sehat,setSehat]=useState(null);
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
+    const cookies = new Cookies();
 
     const deletefavorits = async()=>{
+        console.log("here1");
+        console.log(prod._id);
         setIsLoad(true);
-        fetch(stuff.serverAddress.concat('api/user/getfavorits'),{
-            method:"GET",
+        fetch(stuff.serverAddress.concat('api/user/deleteFavorite'),{
+            method:"DELETE",
+            body: JSON.stringify({
+                _id:prod._id
+            }),
+            
             
             headers:{
                 "Authorization":`Bearer ${cookies.get("jwt")}`,
@@ -30,23 +43,25 @@ const Favorits = (prod)=>{
             setSehat(true);
             console.log(json);
             if(json.error!==undefined){
-                console.log("here1");
+               
                 setMessage(json.error.message);
                 setIsLoad(false);
                 setisValid(false);
-                setcanseefav(null);
                
             }else{
                 setMessage(json.message);
                 console.log(json);
-                setcanseefav(true);
-                setData(json.favorits.favorites);
-                dispatch(filterAndSave({arr:json.favorits.favorites,target:1}));
+                dispatch(filterAndSave({arr:arr_data,target:prod._id}));
                 
                 
             }
         });
 
+    }
+    const handler_our = ()=>{
+        deletefavorits();
+        
+        
     }
 
     return(
@@ -66,7 +81,18 @@ const Favorits = (prod)=>{
    <p>
     price:{prod.price}
    </p>
-   <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(filterAndSave({arr:arr_data,target:prod._id}))}>delete</button>
+   <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) =>handler_our() }>delete</button>
+   { isValid === false ? 
+                        <div class="alert alert-danger" role="alert">
+                            <p>{message}</p>
+                         </div>
+                        : sehat?
+                                <div style={{backgroundColor:"green"}}>
+                                    <p>{message}</p>
+                                </div>
+                     :null
+                    
+                    }
   </Card.Body>
 </Card>
 
