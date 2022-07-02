@@ -4,7 +4,7 @@
 //second is for fetching last three search history and save them continuously in local storage with id s -> 0, 1, 2
 import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
-    login:false,
+    login:JSON.parse(localStorage.getItem('logged')),
     holder:[]
 };
 export const torob_Slice = createSlice({
@@ -18,6 +18,7 @@ export const torob_Slice = createSlice({
             }else{
                 state.login = false;
             }
+            window.localStorage.setItem('logged',JSON.stringify(state.login));
           },
           filterAndSave: (state,action) => {
             state.holder = action.payload.arr.filter(a=>a._id!==action.payload.target);

@@ -9,12 +9,15 @@ function App() {
   return(
 
   <Router>
-      <div className='App'>
-          
-          <Routes>
+       <header>
+       <Routes>
               <Route exact path='*' element={<Home/>}></Route> 
           </Routes>
-      </div>
+      
+    </header>
+          
+         
+      
 
   </Router>
   

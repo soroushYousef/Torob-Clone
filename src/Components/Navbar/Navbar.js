@@ -1,14 +1,18 @@
 import {Link} from "react-router-dom"
 import * as stuff from '../../stuff'
 import Cookies from 'universal-cookie';
+import { menuItems } from "../menuitems";
+import MenuItems from "./MenuItems";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {React,useEffect,useState} from "react";
 import {useLocation,useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { changeLoginState} from '../redux/reducer'
+import {Navbar,Nav,Container,Button,NavDropdown} from 'react-bootstrap'
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar_com = () => {
     const cookies = new Cookies();
     const dispatch=useDispatch();
     const navigate = useNavigate();
@@ -30,6 +34,7 @@ const Navbar = () => {
         }
     }
     useEffect(() => {
+        console.log(login+" "+"defgchvjkl");
       if(login===true){
         console.log(cookies.get('isAdmin'))
         if(cookies.get('isAdmin')!==undefined&&cookies.get('isAdmin')==="true"){
@@ -40,15 +45,17 @@ const Navbar = () => {
         }
 
       }
-    }, [login]);
+    }, []);
     
     return (
-
-
+        <Navbar  style={{width:"100%"}} collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container style={{display:"flex",flexDirection:"row",alignItems:"center",alignContent:"left",justifyContent:"left"}}>
         
-        <div className="navbar-container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                {
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            
+          {
                     !login?
                     <div>
                         <a className="nav-item nav-link  ms-4 border"><Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>ثبت نام </Link> </a>
@@ -58,17 +65,14 @@ const Navbar = () => {
                     :
                     <div className="div_flex">
                         <div >
-                        <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => navigate('/userProfile',{replace:true})}> profile </button>
+                        <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => navigate('/userProfile',{replace:true})}>profile</button>
                         </div>
                         <div>
-                            <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>signout  </Link></button>
-                        </div>
-                        <div>
-                            <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => console.log("sign in")}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNIN}>signin  </Link></button>
+                            <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>signout  </Link></button>
                         </div>
                         {
                             cookies.get("isAdmin")==="true"||cookies.get("isStoreOwner")==="true"?
-                            <button type="submit" style={{marginLeft:"10px",backgroundColor:"gray",width:"80px",height:"60px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => handle_pannel()}>   پنل کاربری  </button>
+                            <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => handle_pannel()}>  pannel  </button>
                             :
                             null
                         }
@@ -79,21 +83,23 @@ const Navbar = () => {
                     
                     
                 }
-               
-                <div className="collapse navbar-collapse justify-content-end me-4" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                    <a className="nav-item nav-link me-4 active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a className="nav-item nav-link me-4" href="#">Features</a>
-                    <a className="nav-item nav-link me-4" href="#">Pricing</a>
-                    <a className="nav-item nav-link me-4" href="#">Disabled</a>
-                    </div>
-                </div>
-            </nav>
+          {menuItems.map((menu, index) => {
+          const depthLevel = 0;
+          return <MenuItems items={menu} key={index} depthLevel={depthLevel} />;
+        })}
+        
+            
+          </Nav>
+        </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-        </div>
+
+        
+       
     )
 }
 
 
 
-export default Navbar;
+export default Navbar_com;
