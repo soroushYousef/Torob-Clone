@@ -5,7 +5,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
     login:JSON.parse(localStorage.getItem('logged')),
-    holder:[]
+    holder:[],
+    update:false,
+    update1:false,
+    update2:false
 };
 export const torob_Slice = createSlice({
     name: "slice_for_torob",
@@ -24,12 +27,19 @@ export const torob_Slice = createSlice({
             state.holder = action.payload.arr.filter(a=>a._id!==action.payload.target);
             console.log(action.payload.arr);
             console.log("popopo");
-          }
+          },
+          updateCaategory: (state) => {
+           state.update = state.update===true?false:true;
+          },updateCaategory1: (state) => {
+            state.update1 = state.update1===true?false:true;
+           },updateCaategory2: (state) => {
+            state.update2 = state.update2===true?false:true;
+           }
       
     },
   });
   
-  export const {changeLoginState,filterAndSave} = torob_Slice.actions;
+  export const {changeLoginState,filterAndSave,updateCaategory,updateCaategory1,updateCaategory2} = torob_Slice.actions;
   
   export default torob_Slice.reducer;
   

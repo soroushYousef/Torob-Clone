@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-
+import { Link,useNavigate ,useLocation} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import  {changeLoginState,filterAndSave,updateCaategory1} from '../redux/reducer'
 import Dropdown from "./Dropdown";
 
 const MenuItems = ({ items, depthLevel }) => {
   const [dropdown, setDropdown] = useState(false);
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
   let ref = useRef();
 
   useEffect(() => {
@@ -29,6 +32,18 @@ const MenuItems = ({ items, depthLevel }) => {
   const onMouseLeave = () => {
     window.innerWidth > 960 && setDropdown(false);
   };
+ 
+  const getProductOfThisCategory = (sb)=>{
+    navigate('/productCategory',{replace:true,state:sb});
+  }
+  const handle_click= ()=>{
+    setDropdown((prev) => !prev);
+    console.log("which menu");
+    console.log(items);
+    console.log("which menu1");
+    getProductOfThisCategory(items);
+    dispatch(updateCaategory1());
+  }
 
   return (
     <li
@@ -37,25 +52,25 @@ const MenuItems = ({ items, depthLevel }) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {items.submenu ? (
+      {items.subQueries&&items.subQueries.length!==0 ? (
         <>
           <button
             type="button"
             aria-haspopup="menu"
             aria-expanded={dropdown ? "true" : "false"}
-            onClick={() => setDropdown((prev) => !prev)}
+            onClick={() => handle_click()}
           >
-            {items.title}{" "}
+            {items.name}{" "}
             {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
           </button>
           <Dropdown
             depthLevel={depthLevel}
-            submenus={items.submenu}
+            submenus={items.subQueries}
             dropdown={dropdown}
           />
         </>
       ) : (
-        <a href="/#">{items.title}</a>
+        <a href=""onClick={()=>getProductOfThisCategory(items)}>{items.name} </a>
       )}
     </li>
   );

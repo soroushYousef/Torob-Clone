@@ -43,8 +43,9 @@ header {
 .menu-items a {
   display: block;
   font-size: inherit;
-  color: purple;
+  color: rgb(0, 128, 4);
   text-decoration: none;
+  font-size: 16px;
 }
 
 .menu-items button {

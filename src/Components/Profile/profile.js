@@ -21,11 +21,15 @@ const ProfilePage = () => {
     const [isValid1,setisValid1]=useState(null);
     const dispatch=useDispatch();
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
+    const update = useSelector((state)=>state.slice_for_torob.update2);
     const cookies = new Cookies();
 
     useEffect(() => {
         setData(arr_data);
+        setSehat(null);
+        setisValid(true);
       }, [arr_data]);
+      
    
     const getfavorits = async()=>{
         setIsLoad(true);

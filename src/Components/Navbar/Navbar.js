@@ -19,6 +19,11 @@ const Navbar_com = () => {
     const [isAdmin,setIsAdmin] = useState(null);
     const[isStoreOwner,setisStoreOwner] = useState(null);
     const login = useSelector((state)=>state.slice_for_torob.login);
+    const update = useSelector((state)=>state.slice_for_torob.update);
+    const [isValid,setisValid]=useState(null);
+    const [ sehat,setSehat]=useState(null);
+    const [message,setMessage]=useState(null);
+    const[data,setData]=useState(null);
     console.log(login);
     const handle_pannel = async() =>{
         try{
@@ -33,8 +38,29 @@ const Navbar_com = () => {
             console.log(error);
         }
     }
+    const get_main_categories = async ()=>{
+        fetch(stuff.serverAddress.concat('api/category/getSubQueries'),{
+            method:"GET",
+            headers:{
+                "Authorization":`Bearer ${cookies.get("jwt")}`,
+                "Content-type" : "application/json;charset=UTF-8"
+            }
+        }).then(response=>response.json()).then(json=>{
+            setisValid(true);
+            console.log(json);
+            if(json.error!==undefined){
+                console.log("here1");
+                console.log(json.reoprts);
+                setMessage(json.error.message);
+                setisValid(false);
+            }else{
+                setMessage(json.message);
+                setData(json.subCategories);   
+            }
+        });
+    }
     useEffect(() => {
-        console.log(login+" "+"defgchvjkl");
+        get_main_categories();
       if(login===true){
         console.log(cookies.get('isAdmin'))
         if(cookies.get('isAdmin')!==undefined&&cookies.get('isAdmin')==="true"){
@@ -45,19 +71,18 @@ const Navbar_com = () => {
         }
 
       }
-    }, []);
+    }, [update]);
     
     return (
-        <Navbar  style={{width:"100%"}} collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container style={{display:"flex",flexDirection:"row",alignItems:"center",alignContent:"left",justifyContent:"left"}}>
-        
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            
-          {
-                    !login?
-                    <div>
+       
+
+<Navbar  class="overflow-visible" style={{width:"100%"}} collapseOnSelect expand="lg" bg="dark" variant="dark">
+<Container style={{display:"flex",flexDirection:"row",height:"fit-content",justifyContent:"first"}}>
+<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+<Navbar.Collapse id="responsive-navbar-nav">
+  <Nav className="me-auto">
+    {  !login?
+                    <div className="div_flex">
                         <a className="nav-item nav-link  ms-4 border"><Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>ثبت نام </Link> </a>
                         <a className="nav-item nav-link  ms-4 border"><Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNIN}> ورود </Link> </a>
                     </div>
@@ -83,16 +108,23 @@ const Navbar_com = () => {
                     
                     
                 }
-          {menuItems.map((menu, index) => {
+  
+  {
+          data?
+          data.map((menu, index) => {
           const depthLevel = 0;
           return <MenuItems items={menu} key={index} depthLevel={depthLevel} />;
-        })}
-        
-            
-          </Nav>
-        </Navbar.Collapse>
-        </Container>
-      </Navbar>
+        }):null
+    
+    }
+
+    
+  </Nav>
+  
+</Navbar.Collapse>
+</Container>
+</Navbar>
+      
 
 
         

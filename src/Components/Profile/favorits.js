@@ -21,7 +21,7 @@ const Favorits = (prod)=>{
     const [sehat,setSehat]=useState(null);
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
     const cookies = new Cookies();
-
+    
     const deletefavorits = async()=>{
         console.log("here1");
         console.log(prod._id);

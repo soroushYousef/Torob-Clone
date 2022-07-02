@@ -5,15 +5,20 @@ import { Link,useNavigate } from "react-router-dom";
 import {Route,Routes,BrowserRouter as Router} from "react-router-dom"
 import './AdminPannel.css';
 import '../SignUp/SignUp.css';
+import { useSelector, useDispatch } from "react-redux";
 import Cookies from 'universal-cookie';
+import {changeLoginState,filterAndSave,updateCaategory} from '../redux/reducer'
 
 const AdminPannel = () => {
     const [isLoad,setIsLoad] = useState(false);
+    const dispatch = useDispatch();
     const [message,setMessage]=useState(null);
     const [isValid,setisValid]=useState(null);
+    const [isValid1,setisValid1]=useState(null);
     const [name,setName]=useState(null);
     const [path,pathName]=useState(null);
     const [sehat,setSehat]=useState(null);
+    const [sehat1,setSehat1]=useState(null);
     const[user_name,setUser]=useState(null);
     const[user_email,setEmail]=useState(null);
     const[mobile,setMobile]=useState(null);
@@ -44,6 +49,7 @@ const AdminPannel = () => {
                 setisValid(true);
                 setIsLoad(false);
                 setSehat(true);
+                dispatch(updateCaategory());
                 setMessage(result.data.message); 
         
         }catch(error) {

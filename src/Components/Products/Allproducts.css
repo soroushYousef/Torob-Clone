@@ -1,0 +1,32 @@
+.products_in_cat {
+    width: 60%;
+    margin-top: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    column-gap: 40px;
+    align-items: center;
+    justify-content: first;
+      background-position: center;
+      align-items: center;
+      margin-left: 20px;
+  }
+
+.result_search{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20%;
+}
+.filter_product{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: end;
+    margin-right: 20px;
+    align-items: flex-end;
+    background-color: rgb(15, 12, 15);
+    margin-top: 8rem;
+    border-radius: 20px;
+    height: fit-content;
+
+}
