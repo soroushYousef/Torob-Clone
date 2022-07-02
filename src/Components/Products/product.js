@@ -20,6 +20,8 @@ const Product = (prod)=>{
     const [message,setMessage]=useState(null);
     const [sehat,setSehat]=useState(null);
     const arr_data = useSelector((state)=>state.slice_for_torob.holder);
+    const isStoreman = useSelector((state)=>state.slice_for_torob.isStoreman);
+    const [clickAddP,setclickaddp]=useState(null);
     const cookies = new Cookies();
 
    const addToFavorits = async()=>{
@@ -38,6 +40,9 @@ const Product = (prod)=>{
           console.log("here1");
           setMessage(json.error.message);
           setisValid(false);
+          setTimeout(() => {
+            setisValid(true);
+          }, 4000);
       }else{
           setMessage(json.message);
           dispatch(updateCaategory2());   
@@ -45,9 +50,7 @@ const Product = (prod)=>{
   });
     
    }
-   useEffect(() => {
-    setisValid(true);
-}, []);
+  
 
     return(
       <div className="product">
@@ -61,7 +64,41 @@ const Product = (prod)=>{
    <p>
     price:{prod.price}
    </p>
+   <div style={{display:"flex",flexDirection:"column"}}>
    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) =>addToFavorits() }>ADD to Favorits</button>
+   {
+    isStoreman==="true"?
+    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) =>setclickaddp(true) }>ADD this product from your store</button>
+    :null
+   }
+   {
+    clickAddP?
+    <form action="">
+    <div className="from-group mb-4">
+            <label className="mb-2" htmlFor="inputName">نام فروشگاه</label>
+            <input type="text" className="form-control" id="inputName" aria-describedby="emailHelp" onChange={(e) => setName(e.target.value)} placeholder="" />
+           
+        </div>
+        <div className="from-group mb-4">
+            <label className="mb-2" htmlFor="inputEmail">قیمت </label>
+            <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setEmail(e.target.value)} placeholder="" />
+           
+        </div>
+        <div className="from-group mb-4">
+            <label className="mb-2" htmlFor="inputEmail">link </label>
+            <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setEmail(e.target.value)} placeholder="" />
+           
+        </div>
+        <button style={{width:"100%"}} type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) =>setclickaddp(true) }>افزودن</button>
+        </form>
+        
+    :null
+   }
+
+   </div>
+   
+   
+   
    { isValid === false ? 
                         <div class="alert alert-danger" role="alert">
                             <p>{message}</p>
