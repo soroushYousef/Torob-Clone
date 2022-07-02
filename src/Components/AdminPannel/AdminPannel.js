@@ -18,6 +18,7 @@ const AdminPannel = () => {
     const[user_email,setEmail]=useState(null);
     const[mobile,setMobile]=useState(null);
     const[pass,setpass]=useState(null);
+    const [fields,setfields]=useState(null);
     const cookies = new Cookies();
    
     const addCategory = async(e) =>{
@@ -35,7 +36,7 @@ const AdminPannel = () => {
                       return Promise.reject(error);
                   }
               );
-            let result = await axios.post(stuff.serverAddress.concat(stuff.ADDCATEGORY).concat(`/addCategory?name=${name}&path=${path}`), {
+            let result = await axios.post(stuff.serverAddress.concat(stuff.ADDCATEGORY).concat(`/addCategory?name=${name}&path=${path}&fields=${fields}`), {
            
                 config
            
@@ -124,6 +125,11 @@ const AdminPannel = () => {
                     <div className="from-group mb-4">
                         <label className="mb-2" htmlFor="inputEmail">path of category </label>
                         <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => pathName(e.target.value)} placeholder="    مسیر رسیدن به کتگوری تان را مشخص کنید" />
+                       
+                    </div>
+                    <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">fields </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setfields(e.target.value)} placeholder="fields with -" />
                        
                     </div>
                     </form>

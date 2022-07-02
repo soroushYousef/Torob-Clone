@@ -24,7 +24,17 @@ const StoreOwnerPannel = () => {
     const[editprf,seteditprf]=useState(null);
     const[seerepo,setseerepo]=useState(null);
     const [canseeRepo,setcan]=useState(null);
+    const [notavailable,setnot]=useState(null);
+    const [price,setprice]=useState(null);
+    const [link,setlink]=useState(null);
     const [data,usedata]=useState(null);
+    const [field_one,setfieldone]=useState(null);
+    const [field_two,setfieldtwo]=useState(null);
+    const [field_three,setfieldthree]=useState(null);
+    const [field_four,setfieldfour]=useState(null);
+    const [notavailableloaded,setnavlo]=useState(null);
+    const[productesm,setesm]=useState(null);
+    const [json_field,setjf]=useState(null);
     const cookies = new Cookies();
    
 
@@ -35,6 +45,7 @@ const StoreOwnerPannel = () => {
         setseerepo(false);
         setSehat(null);
         setisValid(null);
+        setnot(null);
         setMobile(null);
         setEmail(null);
         setName(null);
@@ -66,6 +77,7 @@ const StoreOwnerPannel = () => {
                 setIsLoad(false);
                 setSehat(true);
                 setName(null);
+                setnot(null);
                 setMobile(null);
                 setEmail(null);
                 setcan(null);
@@ -104,6 +116,7 @@ const StoreOwnerPannel = () => {
             setisValid(true);
             setIsLoad(false);
             setSehat(true);
+            setnot(null);
             setName(null);
             setEmail(null);
             setMobile(null);
@@ -147,6 +160,7 @@ const StoreOwnerPannel = () => {
             }).then(response=>response.json()).then(json=>{
                 setisValid(true);
                 setIsLoad(false);
+                setnot(null);
                 setSehat(true);
                 setName(null);
                 setcan(null);
@@ -184,6 +198,113 @@ const StoreOwnerPannel = () => {
             seeReports();
         }
     }
+   
+    const getfields = async()=>{
+        setnavlo(true);
+        if(1===0){
+            setMessage('pls enter first path category');
+            setIsLoad(false);
+            setisValid(false);
+            setcan(null);
+            setnot(null);
+            console.log("here2");
+            
+        }else{
+        fetch(stuff.serverAddress.concat(`api/storeOwner/fields?pc=${path}`),{
+            method:"GET",
+            
+            headers:{
+                "Authorization":`Bearer ${cookies.get("jwt")}`,
+                "Content-type" : "application/json;charset=UTF-8"
+            }
+        }).then(response=>response.json()).then(json=>{
+            setisValid(true);
+            setIsLoad(false);
+            setSehat(true);
+            setName(null);
+            setEmail(null);
+            setMobile(null);
+            setcan(true);
+            setnavlo(null);
+            console.log(json);
+            if(json.error!==undefined){
+                console.log("here1");
+                setMessage(json.error.message);
+                setIsLoad(false);
+                setisValid(false);
+                setcan(null);
+            }else{
+                setMessage(json.message);
+                setjf(json);
+                console.log(json);
+                
+            }
+        }).catch(err=>{
+            console.log(err);
+
+        });}
+
+    }
+
+    const addproduct=async()=>{
+        if(field_one===null || field_two===null || field_three===null || field_four===null){
+            setMessage('field ha hame kamel nistand!');
+            setIsLoad(false);
+            setisValid(false);
+
+        }else{
+        setIsLoad(true);
+        const f_se = field_one+"-"+field_two+"-"+field_three+"-"+field_four;
+        fetch(stuff.serverAddress.concat(`api/storeOwner/addProduct`),{
+            method:"POST",
+            body: JSON.stringify({
+                pathCategory:path,
+                storeName:store_name,
+                productName:productesm,
+                productPrice:price,
+                productFields:f_se,
+                link:link
+            }),
+            headers:{
+                "Authorization":`Bearer ${cookies.get("jwt")}`,
+                "Content-type" : "application/json;charset=UTF-8"
+            }
+        }).then(response=>response.json()).then(json=>{
+            setisValid(true);
+            setIsLoad(false);
+            setnot(null);
+            setSehat(true);
+            setName(null);
+            setcan(null);
+            setEmail(null);
+            setMobile(null);
+            console.log(json);
+            if(json.error!==undefined){
+                console.log("here1");
+                setMessage(json.error.message);
+                setIsLoad(false);
+                setisValid(false);
+            }else{
+                setMessage(json.message);
+                
+            }
+        });
+    }
+    }
+
+    const handle_fields = async()=>{
+        console.log(path);
+        if(path===null){
+            console.log(addPrd);
+            console.log("here2");
+            
+        }else{
+        setnot(true);
+        getfields();
+        }
+        
+
+    }
 
     return(
         <div>
@@ -207,8 +328,8 @@ const StoreOwnerPannel = () => {
                 </div>
                 <form action="">
                 <div className="from-group mb-4">
-                        <label className="mb-2" htmlFor="inputName">نام کتگوری جدید </label>
-                        <input type="text" className="form-control" id="inputName" aria-describedby="emailHelp" onChange={(e) => setName(e.target.value)} placeholder="  نام کتگوری را وارد کنید  " />
+                        <label className="mb-2" htmlFor="inputName">name of store</label>
+                        <input type="text" className="form-control" id="inputName" aria-describedby="emailHelp" onChange={(e) => setUser(e.target.value)} placeholder="  نام کتگوری را وارد کنید  " />
                        
                     </div>
                     <div className="from-group mb-4">
@@ -216,12 +337,56 @@ const StoreOwnerPannel = () => {
                         <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => pathName(e.target.value)} placeholder="    مسیر رسیدن به کتگوری تان را مشخص کنید" />
                        
                     </div>
+                    {
+                        notavailableloaded?
+                        <button   className="btn btn-primary mb-4 submit-button " onClick={ () => handle_fields()}> add not available product... </button>
+                        :
+                        <button   className="btn btn-primary mb-4 submit-button " onClick={ () => handle_fields()}> add not available product </button>
+                    }
+                   
+                    {
+                        notavailable?
+                        <div>
+                        <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">{json_field!==null?json_field.fields.split("-")[0]:"not-ready-yet"} </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setfieldone(e.target.value)} placeholder="" />
+                        </div>
+                        <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">{json_field!==null?json_field.fields.split("-")[1]:"not-ready-yet"} </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setfieldtwo(e.target.value)} placeholder="" />
+                        </div>
+                        <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">{json_field!==null?json_field.fields.split("-")[2]:"not-ready-yet"} </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setfieldthree(e.target.value)} placeholder="" />
+                        </div>
+                        <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">{json_field!==null?json_field.fields.split("-")[3]:"not-ready-yet"}  </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setfieldfour(e.target.value)} placeholder="" />
+                        </div>
+                        <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">name of product </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setesm(e.target.value)} placeholder="enter your wanna name" />
+                        </div>
+                        </div>
+                        :
+                        null
+                    }
+                    <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">price </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setprice(e.target.value)} placeholder=" enter price" />
+                       
+                    </div>
+                    <div className="from-group mb-4">
+                        <label className="mb-2" htmlFor="inputEmail">link </label>
+                        <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setlink(e.target.value)} placeholder=" enter link" />
+                       
+                    </div>
                     </form>
                     {
                     isLoad === false?
-                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(1)}> افزودن </button>
+                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => addproduct()}> افزودن </button>
                     :
-                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction()}>  ... در حال افزودن</button>
+                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => addproduct()}>  ... در حال افزودن</button>
                     }
                     { isValid === false ? 
                         <div class="alert alert-danger" role="alert">
@@ -388,6 +553,8 @@ const StoreOwnerPannel = () => {
                 
 
             } 
+
+            
             
             
             
