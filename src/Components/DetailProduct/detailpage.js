@@ -31,14 +31,30 @@ const Single_product_detail = () => {
     console.log("khab");
     console.log(location.state);
     const reportsubmit = async ()=>{
-        if(first_check===false&&second_check===false&&report===null){
+        if((first_check===false&&second_check===false)&&report===null){
             setMessage('chizi select nashode!');
             setisValid1(false);
           setTimeout(() => {
             setisValid1(true);
             setreport(null);
           }, 4000);
+          setwhp(null);
+        setstr(null);
+        setreport(null);
         }
+        else if((first_check===true||second_check===true)&&report!==null){
+            console.log("hamzaman");
+            setMessage('hamzamaan nemishe!');
+            setisValid1(false);
+          setTimeout(() => {
+            setisValid1(true);
+            setreport(null);
+          }, 4000);
+          setwhp(null);
+        setstr(null);
+        setreport(null);
+          
+        }else{
         setwhp(null);
         setstr(null);
         setreport(null);
@@ -47,7 +63,7 @@ const Single_product_detail = () => {
             body: JSON.stringify({
                 store_id: whichstr,
                 product_id:whichproduct,
-                description :report
+                description :report?report:first_check?"no-related":"price"
             }),
             headers:{
                 "Authorization":`Bearer ${cookies.get("jwt")}`,
@@ -59,9 +75,10 @@ const Single_product_detail = () => {
                 console.log("here1");
                 setMessage(json.error.message);
                 console.log(json);
-                setisValid(false);
+                setisValid1(false);
+                setsehat1(false);
           setTimeout(() => {
-            setisValid(true);
+            setisValid1(true);
           }, 4000);
             }else{
               
@@ -69,13 +86,14 @@ const Single_product_detail = () => {
                console.log(json);
                console.log("mishe yani?");
                setMessage(json.message); 
-               setsehat(true);
+               setsehat1(true);
+               setisValid1(true);
           setTimeout(() => {
-            setsehat(false);
+            setsehat1(false);
           }, 4000);   
             }
         });
-
+    }
     }
     const getStores = async()=>{
         fetch(stuff.serverAddress.concat('api/user/getProduct'),{
@@ -191,10 +209,10 @@ const Single_product_detail = () => {
             <form class="w3-container w3-card-4">
             <h2>whats problem ?</h2>
                  <p>
-                 <input class="w3-check" type="checkbox"  onChange={()=>{setfirst(first_check===true?true:false)}}></input>
+                 <input class="w3-check" type="checkbox"  onChange={()=>{setfirst(first_check===true?false:true)}}></input>
                  <label>non-related product</label></p>
                  <p>
-                 <input class="w3-check" type="checkbox"  onChange={()=>{setsecond(second_check===true?true:false)}}></input>
+                 <input class="w3-check" type="checkbox"  onChange={()=>{setsecond(second_check===true?false:true)}}></input>
                  <label>price-problem</label></p>
                  <div className="from-group mb-4">
                     <label className="mb-2" htmlFor="inputName"> گزارش دیگر</label>

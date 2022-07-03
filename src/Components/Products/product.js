@@ -31,7 +31,6 @@ const Product = (prod)=>{
     });
     const cookies = new Cookies();
    const addToFavorits = async ()=>{
-    setclickaddp(true);
     fetch(stuff.serverAddress.concat(`api/user/addproducttofavorite`),{
       method:"POST",
       body: JSON.stringify({
@@ -42,7 +41,6 @@ const Product = (prod)=>{
           "Content-type" : "application/json;charset=UTF-8"
       }
   }).then(response=>response.json()).then(json=>{
-      setisValid(true);
       if(json.error!==undefined){
           console.log("here1");
           setMessage(json.error.message);
@@ -55,7 +53,7 @@ const Product = (prod)=>{
           dispatch(updateCaategory2()); 
           setSehat(true);
           setTimeout(() => {
-            setisValid(false);
+            setSehat(false);
           }, 4000);  
       }
   });
@@ -84,6 +82,7 @@ const Product = (prod)=>{
           console.log("here1");
           setMessage(json.error.message);
           setisValid(false);
+          setSehat(false);
           setTimeout(() => {
             setisValid(true);
           }, 4000);
@@ -92,6 +91,7 @@ const Product = (prod)=>{
           setSehat(true);
           setTimeout(() => {
             setSehat(false);
+            setisValid(true);
             setclickaddp(null);
           }, 4000);   
       }

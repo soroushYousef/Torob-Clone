@@ -7,12 +7,14 @@ import * as stuff from "../../stuff";
 import './SignUp.css'
 import {useLocation,useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
+import { changeLoginState} from '../redux/reducer'
 
 const OtpVerify = () => {
     const [isValid,setIsValid] = useState(true); 
     const[code,setCode]=useState(null);
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [message,setMessage] = useState('');
     const cookies = new Cookies();
  
@@ -26,6 +28,7 @@ const OtpVerify = () => {
         cookies.set('jwt', result.data.token, { path: '/' });
         cookies.set('isAdmin', result.data.isAdmin, { path: '/' });
         cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
+        dispatch(changeLoginState(1));
         setIsValid(true);
         navigate('/',{replace:true})
         }catch(error) {
