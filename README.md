@@ -40,4 +40,8 @@ This project is bulit using below:
 - Bootstrap version 5
 
 ## Setup and Run
-To run this project, you need to install it locally using npm
+To run this project, you need to install it locally using npm <br />
+First , you need to install node.js from this [link](https://nodejs.org/en/) <br />
+Then , clone the code and open it with any editor. <br />
+Then , run the following command :
+$ cd ../Torob-Clone-Master
