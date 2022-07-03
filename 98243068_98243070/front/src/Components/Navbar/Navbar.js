@@ -95,6 +95,9 @@ const Navbar_com = () => {
                         <div>
                             <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNUP}>signout  </Link></button>
                         </div>
+                        <div>
+                            <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => dispatch(changeLoginState())}>  <Link style={{textDecoration : 'none' , color : 'black'}} to={stuff.SIGNIN}>signin  </Link></button>
+                        </div>
                         {
                             cookies.get("isAdmin")==="true"||cookies.get("isStoreOwner")==="true"?
                             <button type="submit" style={{margin:"10px auto",backgroundColor:"purple",width:"80px",height:"50px"}}  className="btn btn-primary mb-4 submit-button " onClick={ (e) => handle_pannel()}>  pannel  </button>

@@ -31,6 +31,8 @@ const Product = (prod)=>{
     });
     const cookies = new Cookies();
    const addToFavorits = async ()=>{
+    console.log(prod.pathCategory);
+    console.log("emtehan");
     fetch(stuff.serverAddress.concat(`api/user/addproducttofavorite`),{
       method:"POST",
       body: JSON.stringify({

@@ -63,7 +63,7 @@ const Single_product_detail = () => {
         fetch(stuff.serverAddress.concat('api/user/report'),{
             method:"POST",
             body: JSON.stringify({
-                store_id: whichstr,
+                store_id : whichstr,
                 product_id:whichproduct,
                 description :report?report:first_check?"no-related":"price"
             }),
