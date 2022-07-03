@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Torob-clone Front-End
+Internet Engineering final project client side
+## Table Of Contents
+* [Introduction](#introduction)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Extra](#extra)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Introduction
+This project is a simple clone of maketing search website named ([torob)](https://torob.com/) <br />
+Some features such as searching products or user cart are not implemented<br />
+This is clint-side clone project <br />
+You can visit serever side from this [link](https://github.com/mohamadmahdi1234/Torob_Server)
+- #### What our application does ?
+This react app is a simple marketing search Tool. This can help customers to find their products based on their typs. <br />
+This app is also help sellers to present their products . They can alos find customers opinion about their products <br />
+- #### what features does our application have ?
+  1. Find products based on their types as customer
+  2. Find sub types of each category as customer
+  3. Write report about each product as customer
+  4. Share products based on category as seller
+  5. Find reports wrriten by customers as seller
+  6. See poducts based on the date that as seller
+  7. Sign up using email with otp technology
+  8. Dedicated panel for each role such as admin,user and etc
+- #### Some challanges that we had faced over developing this app
+  1. Connecting to the server side
+  2. Design components such as selecting color or size
+  3. Design components responsive
+  4. Select the approperiate bootstrap classes
+  5. Using react asynchron functions such as useEffect
+- #### Application Gallery
+  - Here are some of websites screenshots
 
-In the project directory, you can run:
 
-### `npm start`
+## Technologies
+This project is bulit using below:
+- React version 18.2
+- HTML version 5
+- CSS
+- Bootstrap version 5
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup
+To run this project, you need to install it locally using npm <br />
+First , you need to install node.js from this [link](https://nodejs.org/en/) <br />
+Then , clone the code and open it with any editor. <br />
+Then , run the following command :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+cd ../Torob-Clone-Master
+npm install
+npm run install-dependecis
+npm start
+```
+the first command will change directory to the project. <br />
+the second command will install all dependencies for the application. <br /> 
+the second command will run the programm.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Extra
+This app will run on port 3000. If you have other programms that run on this port , You can manuallu change it from code.
