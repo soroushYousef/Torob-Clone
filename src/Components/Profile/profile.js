@@ -122,57 +122,7 @@ const ProfilePage = () => {
 
 
 
-            <div className="container h-100 signup-container mt-5">
-            
-        <div className="d-flex flex-column justify-content-center px-2" style={{alignContent:"center",justifyContent:"center",alignItems:"center",
-                        borderRadius: "25px"}}>
-        <div className="ability-container" style={{backgroundColor:"green",width:"50%",marginBottom:"20px"}}>
-                    <p> admin can add storeOwner here!</p>
-                </div>
-            <form action="">
-            <div className="from-group mb-4">
-                    <label className="mb-2" htmlFor="inputName">نام کاربری</label>
-                    <input type="text" className="form-control" id="inputName" aria-describedby="emailHelp" onChange={(e) => setUser(e.target.value)} placeholder="نام صاحب را وارد کنید" />
-                   
-                </div>
-                <div className="from-group mb-4">
-                    <label className="mb-2" htmlFor="inputEmail">آدرس ایمیل</label>
-                    <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setEmail(e.target.value)} placeholder="ایمیل صاحب را وارد کنید" />
-                   
-                </div>
-                <div className="form-group mb-4">
-                    <label className="mb-2" htmlFor="inputPassword">رمز عبور</label>
-                    <input type="password" className="form-control" id="inputPassword" onChange={ (e) => setpass(e.target.value) } />
-                </div>
-                
-                <div className="from-group mb-4">
-                    <label className="mb-2" htmlFor="inputEmail">شماره موبایل </label>
-                    <input type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" onChange={(e) => setMobile(e.target.value)} placeholder="موبایل صاحب را وارد کنید" />
-                   
-                </div>
-                </form>
-                {
-                    isLoad === false?
-                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction(2)}> افزودن </button>
-                    :
-                    <button type="submit"  className="btn btn-primary mb-4 submit-button " onClick={ (e) => submitAction()}>  ... در حال افزودن</button>
-                    }
-                    { isValid1 === false ? 
-                        <div class="alert alert-danger" role="alert">
-                            <p>{message}</p>
-                         </div>
-                        : sehat1?
-                                <div style={{backgroundColor:"green"}}>
-                                    <p>{message}</p>
-                                </div>
-                     :null
-                    
-                    } 
-                
-           
-        </div>
-        </div>
-        </div>
+            </div>
     )
 }
 
