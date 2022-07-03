@@ -3,6 +3,8 @@ Internet Engineering final project client side
 ## Table Of Contents
 * [Introduction](#introduction)
 * [Technologies](#technologies)
+* [Setup](#setup)
+* [Extra](#extra)
 
 
 ## Introduction
@@ -39,9 +41,20 @@ This project is bulit using below:
 - CSS
 - Bootstrap version 5
 
-## Setup and Run
+## Setup
 To run this project, you need to install it locally using npm <br />
 First , you need to install node.js from this [link](https://nodejs.org/en/) <br />
 Then , clone the code and open it with any editor. <br />
 Then , run the following command :
-$ cd ../Torob-Clone-Master
+
+```
+cd ../Torob-Clone-Master
+npm run install-dependecis
+npm start
+```
+the first command will change directory to the project. <br />
+the second command will install all dependencies for the application. <br /> 
+the second command will run the programm.
+
+## Extra
+This app will run on port 3000. If you have other programms that run on this port , You can manuallu change it from code.
