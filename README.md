@@ -49,6 +49,7 @@ Then , run the following command :
 
 ```
 cd ../Torob-Clone-Master
+npm install
 npm run install-dependecis
 npm start
 ```
