@@ -31,8 +31,6 @@ const Single_product_detail = () => {
     console.log("khab");
     console.log(location.state);
     const reportsubmit = async ()=>{
-        console.log("first checkbox is");
-        console.log(first_check);
         if((first_check===false&&second_check===false)&&report===null){
             setMessage('chizi select nashode!');
             setisValid1(false);
