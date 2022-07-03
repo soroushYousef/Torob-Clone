@@ -35,7 +35,7 @@ const SignIn = () => {
         console.log("piruzi");
         cookies.set('isStoreOwner', result.data.isStoreOwner, { path: '/' });
         dispatch(changeLoginState(1));
-        navigate('/',{replace:true})
+        navigate('/',{replace:true});
         }catch(error) {
             if(error.response){
                setISLoad(false);
