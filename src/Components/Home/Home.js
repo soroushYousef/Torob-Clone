@@ -8,6 +8,7 @@ import AdminPannel from "../AdminPannel/AdminPannel";
 import StoreOwnerPannel from '../StoreOwnerPannel/StoreOwnerPannel';
 import Profile from '../Profile/profile';
 import Products from '../Products/products';
+import DetailProduct from '../DetailProduct/detailpage'
 const Home = () => {
     
 
@@ -24,6 +25,7 @@ const Home = () => {
                     <Route path="/storeOwnerPannel" element={<StoreOwnerPannel />} />
                     <Route path="/userProfile" element={<Profile />} />
                     <Route path="/productCategory" element={<Products />} />
+                    <Route path="/detailProduct" element={<DetailProduct />} />
                           
                 </Routes>
         
